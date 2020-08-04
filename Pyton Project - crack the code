@@ -1,0 +1,35 @@
+import random
+print("Welcome Code Breaker! Let's see if you can guess my 3 digit number!\n")
+game_over="Y"
+while game_over=="y" or game_over=="Y":
+    genrate_num=list(range(0,10))
+    random.shuffle(genrate_num)
+    computer_guess=genrate_num[:3]
+    print(computer_guess)
+    attempt=3
+    guess_count=0
+    while attempt>=0:
+        user_input=[]
+        guess_count+=1
+        num=input("Enter 3 Digit number: ")
+        for i in num:
+            user_input.append(int(i))
+        if user_input==computer_guess:
+            print("Code Cracked")
+            break
+        else:
+            help=[]
+            help.clear()
+            for i,digit in enumerate(computer_guess):
+                if user_input[i]==digit:
+                    help.append("match")
+                elif digit in user_input:
+                    help.append("close")
+                else:
+                    help.append("Wrong")
+        print(help)
+        print(f"You have {attempt} Attempt left\n")
+        attempt-=1
+        if attempt<0:
+            print("Sorry !!! Try Again\n")
+    game_over=input("Play again 'Y' and 'N'\n")
